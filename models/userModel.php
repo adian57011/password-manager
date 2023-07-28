@@ -55,4 +55,20 @@ function login($username)
     return false;
 }
 
+function add($website,$username,$password,$id)
+{
+    $con = connection();
+    $sql = "INSERT INTO 
+            lists(website,username,password,userId)
+            VALUES('$website','$username','$password','$id')";
+    
+    $query = mysqli_query($con,$sql);
+
+    if($query)
+    {
+        return false;
+    }
+    return true;
+}
+
 ?>

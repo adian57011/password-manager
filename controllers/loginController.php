@@ -1,5 +1,6 @@
 <?php
 require_once("../models/userModel.php");
+session_start();
 
 if(isset($_POST['submit']))
 {
@@ -26,7 +27,7 @@ if(isset($_POST['submit']))
           }
           else
           {
-            
+            $id = $res['id'];
             $hash = $res['password'];
             
             $verify = password_verify($password,$hash);
@@ -39,7 +40,9 @@ if(isset($_POST['submit']))
             else
             {
                 echo "Login Successfull";
+                $_SESSION['id'] = $id;
                 $_SESSION['username'] = $username;
+                header("location:../views/userDashboard.php");
             }
           }
         }
