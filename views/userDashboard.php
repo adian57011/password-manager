@@ -1,9 +1,10 @@
 <?php
 session_start();
-if($_SESSION["username"] != null)
+if($_SESSION["username"] == null && $_SESSION["id"] == null)
 {
     echo "Unauthorize access";
 }
+else{
 ?>
 
 <html>
@@ -11,11 +12,14 @@ if($_SESSION["username"] != null)
         <title>Dashboard</title>
     </head>
     <body>
-         <h1>Welcome <?php $_SESSION['username'];?></h1>
+         <h1>Welcome <?php echo  $_SESSION['username'];?></h1>
 
-         <a href="add.php">Add password directory</a>
-         <a href="view.php">View All</a>
-         <a href="logout.php">Logout</a>
+         <a href="add.php">Add password directory</a> <br>
+         <a href="views.php">View All</a> <br>
+         <a href="../controllers/logout.php">Logout</a> <br>
     
     </body>
 </html>
+<?php
+}
+?>

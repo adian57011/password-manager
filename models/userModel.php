@@ -64,11 +64,22 @@ function add($website,$username,$password,$id)
     
     $query = mysqli_query($con,$sql);
 
-    if($query)
+    if(!$query)
     {
         return false;
     }
     return true;
+}
+
+function all($userId)
+{
+    $con = connection();
+    $sql = "SELECT *
+            FROM lists
+            WHERE userId = '$userId'";
+    
+    $query = mysqli_query($con,$sql);
+    return $query;
 }
 
 ?>

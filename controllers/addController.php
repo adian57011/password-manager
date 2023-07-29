@@ -1,12 +1,14 @@
 <?php
-
+require_once('../models/userModel.php');
+session_start();
 const KEY = "57011";
 
 if(isset($_POST['submit']))
 {
-    $website = $_POST['website'];
+    $website = $_POST['websites'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $id = $_SESSION['id'];
 
     if($website == null)
     {
@@ -26,14 +28,7 @@ if(isset($_POST['submit']))
             }
             else
             {
-                //openssl ekta encrypt method. cipher algo ekta encryption algorithm. iv ekta codejeita algoritm er size wise nite hoi. option diya kisu ekta hoi
-                //main jinish hoitese key. jeita decprytion e lagbe. good luck!
-                $cipher_algo = "AES-256-CBC";
-                $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-256-CBC'));
-
-                $encrypt = base64_encode(openssl_encrypt($password,$cipher_algo,KEY,0,$iv));
-
-                $status = add($website,$username,$encrypt,$_SESSION['id']);
+                $status = add($website,$username,$password,$id);
 
                 if(!$status)
                 {
@@ -41,7 +36,7 @@ if(isset($_POST['submit']))
                 }
                 else
                 {
-                    echo "Added!";
+                    header('location: ../views/userDashboard.php');
                 }
             }
         }
